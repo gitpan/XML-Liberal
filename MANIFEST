@@ -11,6 +11,7 @@ lib/XML/Liberal/Remedy/UnquotedAttribute.pm
 lib/XML/Liberal/Remedy/XHTMLEmptyTag.pm
 Makefile.PL
 MANIFEST			This list of files
+META.yml			Module meta-data (added by MakeMaker)
 t/00_compile.t
 t/01_bad.t
 t/bad/BAD-ampersand.xml
@@ -52,4 +53,3 @@ t/bad/BAD-html.xml
 t/bad/BAD-lowascii.xml
 t/bad/BAD-unquoted-nbsp.xml
 t/bad/BAD-unquoted.xml
-META.yml                                 Module meta-data (added by MakeMaker)

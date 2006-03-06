@@ -1,7 +1,7 @@
 package XML::Liberal;
 
 use strict;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use base qw( Class::Accessor );
 use Carp;
@@ -59,6 +59,18 @@ sub parse_string {
     Carp::croak($@) if !$doc;
 
     return $doc;
+}
+
+sub parse_file {
+    my($self, $file) = @_;
+    open my $fh, "<", $file or croak "$file: $!";
+    $self->parse_fh($fh);
+}
+
+sub parse_fh {
+    my($self, $fh) = @_;
+    my $xml = join '', <$fh>;
+    $self->parse_string($xml);
 }
 
 1;

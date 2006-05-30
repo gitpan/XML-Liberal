@@ -18,5 +18,16 @@ for my $f (readdir D) {
     my $doc = eval { $parser->parse_file("$data/$f") };
     is $@, '', "$data/$f";
     isa_ok $doc, 'XML::LibXML::Document', "created DOM node with $data/$f";
+
+    $parser = XML::LibXML->new;
+    $parser->recover(1);
+    $doc = eval { $parser->parse_file("$data/$f") };
+    is $@, '', "$data/$f";
+    isa_ok $doc, 'XML::LibXML::Document', "created DOM node with $data/$f";
+
+    $parser = XML::Liberal->new('LibXML');
+    $doc = eval { $parser->parse_file("$data/$f") };
+    is $@, '', "$data/$f";
+    isa_ok $doc, 'XML::LibXML::Document', "created DOM node with $data/$f";
 }
 

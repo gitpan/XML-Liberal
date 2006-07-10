@@ -20,6 +20,18 @@ sub globally_override {
     1;
 }
 
+sub globally_unoverride {
+    my $class = shift;
+
+    no warnings 'redefine';
+    if ($XML_LibXML_new) {
+        *XML::LibXML::new = $XML_LibXML_new;
+        undef $XML_LibXML_new;
+    }
+
+    return 1;
+}
+
 sub new {
     my $class = shift;
     my %param = @_;

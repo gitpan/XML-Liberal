@@ -15,4 +15,4 @@ requires:
   HTML::Entities::Numbered: 0.04
   Module::Pluggable::Fast: 0.16
   XML::LibXML: 1.58
-version: 0.14
+version: 0.15

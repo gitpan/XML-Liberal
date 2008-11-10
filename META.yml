@@ -1,23 +1,25 @@
---- 
-abstract: Super liberal XML parser that parses broken XML
-author: 
-  - Tatsuhiko Miyagawa <miyagawa@bulknews.net>
-build_requires: 
+---
+abstract: 'Super liberal XML parser that parses broken XML'
+author:
+  - 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>'
+build_requires:
   Test::More: 0
 distribution_type: module
-generated_by: Module::Install version 0.68
+generated_by: 'Module::Install version 0.77'
 license: perl
-meta-spec: 
-  url: http://module-build.sourceforge.net/META-spec-v1.3.html
-  version: 1.3
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
 name: XML-Liberal
-no_index: 
-  directory: 
+no_index:
+  directory:
     - inc
     - t
-requires: 
+requires:
   Class::Accessor: 0
   HTML::Entities::Numbered: 0.04
   Module::Pluggable::Fast: 0.16
   XML::LibXML: 1.58
-version: 0.19
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.20

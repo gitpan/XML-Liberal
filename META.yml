@@ -5,7 +5,7 @@ author:
 build_requires:
   Test::More: 0
 distribution_type: module
-generated_by: 'Module::Install version 0.77'
+generated_by: 'Module::Install version 0.79'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,9 +17,11 @@ no_index:
     - t
 requires:
   Class::Accessor: 0
+  Filter::Util::Call: 0
   HTML::Entities::Numbered: 0.04
   Module::Pluggable::Fast: 0.16
-  XML::LibXML: 1.58
+  XML::LibXML: 1.69_02
+  perl: 5.8.1
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.20
+version: 0.21

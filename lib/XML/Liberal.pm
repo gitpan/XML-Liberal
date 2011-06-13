@@ -2,7 +2,7 @@ package XML::Liberal;
 
 use strict;
 use 5.008_001;
-our $VERSION = '0.22';
+our $VERSION = '0.29_01';
 
 use base qw( Class::Accessor );
 use Carp;
@@ -58,29 +58,23 @@ sub parse_string {
     my $self = shift;
     my($xml) = @_;
 
-    my $doc;
-    my $try = 0;
+  TRY:
+    for (1 .. $self->max_fallback) {
+        my $doc = eval { $self->{parser}->parse_string($xml) };
+        return $doc if $doc;
 
-    TRY: {
-        eval {
-            $doc = $self->{parser}->parse_string($xml);
-        };
-        last TRY if $doc || ($try++ > $self->max_fallback);
-
-        if ($@) {
-            my $remedy = $self->handle_error($@);
-            if ($remedy) {
-                warn "try fixing with ", ref($remedy) if $self->debug;
-                my $status = $remedy->apply(\$xml);
-                warn "--- remedy applied: $xml" if $self->debug;
-                redo TRY if $status;
-            }
+        my $error = $self->extract_error($@, \$xml);
+        for my $remedy (sort $self->remedies) {
+            warn "considering $remedy\n" if $self->debug;
+            $remedy->apply($self, $error, \$xml) or next;
+            warn "--- remedy applied: $xml\n" if $self->debug;
+            next TRY;
         }
+
+        # We've considered all possible remedies for this error, and none
+        # worked, so just throw an exception.
+        Carp::croak($error->summary);
     }
-
-    Carp::croak($@) if !$doc;
-
-    return $doc;
 }
 
 sub parse_file {
@@ -223,6 +217,8 @@ might alter your XML content, especially bytes written in CDATA.
 =head1 AUTHOR
 
 Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+
+Aaron Crane
 
 =head1 LICENSE
 
